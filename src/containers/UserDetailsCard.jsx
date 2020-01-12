@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { fetchSelectedUserDetails } from "../thunks/user";
 import { connect } from "react-redux";
 import Utils from "../utils";
-import { clearUserDetails } from "../actions/userData";
+import { clearUserDetails, setSelectedUserDetails } from "../actions/userData";
+import { addUserToUserDetailsHashMap } from "../actions/userDetailsHashMap";
 
 class UserDetailsCard extends Component {
   static propTypes = {
@@ -11,7 +12,10 @@ class UserDetailsCard extends Component {
     selectedUserDetails: PropTypes.object.isRequired,
     selectedUser: PropTypes.number,
     clearUserDetails: PropTypes.func.isRequired,
-    handleCloseUserDetailsCard: PropTypes.func.isRequired
+    handleCloseUserDetailsCard: PropTypes.func.isRequired,
+    addUserToUserDetailsHashMap: PropTypes.func.isRequired,
+    userDetailsHashMap: PropTypes.object.isRequired,
+    setSelectedUserDetails: PropTypes.func.isRequired
   };
 
   state = {
@@ -19,8 +23,15 @@ class UserDetailsCard extends Component {
   };
 
   componentDidMount() {
-    const { selectedUser, fetchSelectedUserDetails } = this.props;
-    fetchSelectedUserDetails(`api/users/${selectedUser}`);
+    const {
+      selectedUser,
+      fetchSelectedUserDetails,
+      userDetailsHashMap,
+      setSelectedUserDetails
+    } = this.props;
+    userDetailsHashMap.hasOwnProperty(selectedUser)
+      ? setSelectedUserDetails(userDetailsHashMap[selectedUser])
+      : fetchSelectedUserDetails(`api/users/${selectedUser}`);
     this.setState({ isFetched: true });
   }
 
@@ -54,14 +65,14 @@ class UserDetailsCard extends Component {
             <path
               d="M13.3333 2.66669L2.66663 13.3334"
               stroke="white"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
             <path
               d="M2.66663 2.66669L13.3333 13.3334"
               stroke="white"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
           </svg>
         </div>
@@ -83,12 +94,19 @@ const mapDispatchToProps = dispatch => ({
   },
   clearUserDetails: () => {
     dispatch(clearUserDetails());
+  },
+  addUserToUserDetailsHashMap: userDetails => {
+    dispatch(addUserToUserDetailsHashMap(userDetails));
+  },
+  setSelectedUserDetails: userDetails => {
+    dispatch(setSelectedUserDetails(userDetails));
   }
 });
 
 const mapStateToProps = state => ({
   selectedUser: state.userData.selectedUser,
-  selectedUserDetails: state.userData.selectedUserDetails
+  selectedUserDetails: state.userData.selectedUserDetails,
+  userDetailsHashMap: state.userDetailsHashMap.userDetailsHashMap
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetailsCard);
