@@ -12,7 +12,8 @@ export default function pagination(state = initialState, action) {
         {},
         {
           ...state,
-          rowPerPage: +action.payload
+          rowPerPage: +action.payload,
+          currentPage: DEFAULT.CURRENT_PAGE
         }
       );
     }
