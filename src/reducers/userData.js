@@ -49,7 +49,6 @@ export default function userData(state = initialState, action) {
         {},
         {
           ...state,
-          selectedUser: 0,
           selectedUserDetails: {}
         }
       );

@@ -56,10 +56,12 @@ class Pagination extends Component {
 
   handleOpenUserDetailsCard = async uid => {
     const { setSelectedUser } = this.props;
-    await setSelectedUser(uid);
-    this.setState(prevState => ({
-      isUserDetailsCardOpen: true
-    }));
+    setSelectedUser(uid);
+    this.setState({ isUserDetailsCardOpen: true });
+  };
+
+  handleCloseUserDetailsCard = () => {
+    this.setState({ isUserDetailsCardOpen: false });
   };
 
   getPerPageRowOptions = totalRows => {
@@ -99,6 +101,7 @@ class Pagination extends Component {
           handleOpenUserDetailsCard={this.handleOpenUserDetailsCard}
           isUserDetailsCardOpen={isUserDetailsCardOpen}
           selectedUser={selectedUser}
+          handleCloseUserDetailsCard={this.handleCloseUserDetailsCard}
         />
         <Conditional if={pagedData.length}>
           <PaginationBar

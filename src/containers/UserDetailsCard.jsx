@@ -10,7 +10,8 @@ class UserDetailsCard extends Component {
     fetchSelectedUserDetails: PropTypes.func.isRequired,
     selectedUserDetails: PropTypes.object.isRequired,
     selectedUser: PropTypes.number,
-    clearUserDetails: PropTypes.func.isRequired
+    clearUserDetails: PropTypes.func.isRequired,
+    handleCloseUserDetailsCard: PropTypes.func.isRequired
   };
 
   state = {
@@ -30,7 +31,7 @@ class UserDetailsCard extends Component {
   render() {
     const { isFetched } = this.state;
     if (!isFetched) return <div>Loading...</div>;
-    const { selectedUserDetails } = this.props;
+    const { selectedUserDetails, handleCloseUserDetailsCard } = this.props;
     const {
       name,
       username,
@@ -42,6 +43,28 @@ class UserDetailsCard extends Component {
     } = selectedUserDetails;
     return !Utils.isEmptyObject(selectedUserDetails) ? (
       <div className="user-details-card">
+        <div className="close" onClick={handleCloseUserDetailsCard}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.3333 2.66669L2.66663 13.3334"
+              stroke="white"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <path
+              d="M2.66663 2.66669L13.3333 13.3334"
+              stroke="white"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </div>
         <h2>{`${name}`}</h2>
         <p>{`User Name: ${username}`}</p>
         <p>{`Email: ${email}`}</p>
