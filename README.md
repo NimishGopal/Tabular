@@ -53,4 +53,3 @@ project
 2. cd into `Tabular`.
 3. Run `yarn` and wait for all the dependencies to install.
 4. Run `yarn start` to start the project.
-5. Open [http://localhost:8000](http://localhost:8000) to view in the browser.
