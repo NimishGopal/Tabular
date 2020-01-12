@@ -2,8 +2,8 @@ import { ActionTypes } from "../constants";
 
 const initialState = {
   userData: [],
-  selectedUser: null,
-  selectedUserDetails: []
+  selectedUser: 0,
+  selectedUserDetails: {}
 };
 
 export default function userData(state = initialState, action) {

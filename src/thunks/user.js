@@ -1,12 +1,12 @@
 import { setUserData, setSelectedUserDetails } from "../actions/userData";
-import { Utils } from "../utils/index.js";
+import Utils from "../utils";
 
 export const fetchUserData = url => async dispatch => {
-  const data = await Utils.fetch(url);
-  dispatch(setUserData(data));
+  const userData = await Utils.fetch(url);
+  dispatch(setUserData(userData));
 };
 
 export const fetchSelectedUserDetails = url => async dispatch => {
-  const data = await Utils.fetch(url);
-  dispatch(setSelectedUserDetails(data));
+  const userDetails = await Utils.fetch(url);
+  dispatch(setSelectedUserDetails(userDetails));
 };

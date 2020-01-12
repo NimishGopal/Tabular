@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Row from "./Row";
 import Page from "./Page";
 import Conditional from "./Conditional";
@@ -11,7 +12,7 @@ const Table = ({
   handleOpenUserDetailsCard,
   selectedUser
 }) => (
-  <>
+  <div className="table">
     <Row
       name="Name"
       username="Username"
@@ -35,7 +36,16 @@ const Table = ({
         selectedUser={selectedUser}
       />
     </Conditional>
-  </>
+  </div>
 );
+
+Table.propTypes = {
+  pagedData: PropTypes.array.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  handleDeleteUser: PropTypes.func.isRequired,
+  isUserDetailsCardOpen: PropTypes.bool.isRequired,
+  handleOpenUserDetailsCard: PropTypes.func.isRequired,
+  selectedUser: PropTypes.number.isRequired
+};
 
 export default Table;

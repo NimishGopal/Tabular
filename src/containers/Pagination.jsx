@@ -1,21 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { deleteUser, setSelectedUser } from "../actions/userData";
 import { setRowPerPage, setCurrentPage } from "../actions/pagination";
 import { fetchUserData } from "../thunks/user";
 import { setFilter } from "../actions/filter";
 import Table from "../components/Table";
-import Selector from "../components/Selector";
+import SelectVisibleRows from "../components/SelectVisibleRows";
 import Conditional from "../components/Conditional";
 import PaginationBar from "../components/PaginationBar";
 import SortBy from "../components/SortBy";
+import Utils from "../utils";
 
 class Pagination extends Component {
+  static propTypes = {
+    fetchUserData: PropTypes.func.isRequired,
+    setSelectedUser: PropTypes.func.isRequired,
+    userData: PropTypes.array.isRequired,
+    rowPerPage: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    setRowPerPage: PropTypes.func.isRequired,
+    setCurrentPage: PropTypes.func.isRequired,
+    deleteUser: PropTypes.func.isRequired,
+    sortBy: PropTypes.string.isRequired,
+    setFilter: PropTypes.func.isRequired,
+    selectedUser: PropTypes.number.isRequired
+  };
+
   state = {
     isUserDetailsCardOpen: false
   };
   componentDidMount() {
-    const { fetchUserData, userData } = this.props;
+    const { fetchUserData } = this.props;
     fetchUserData("api/users");
   }
   componentDidUpdate() {
@@ -33,11 +49,7 @@ class Pagination extends Component {
   };
 
   getPaginationBar = totalPages => {
-    let paginationBar = [];
-    for (let i = 0; i < totalPages; i++) {
-      paginationBar = [...paginationBar, i];
-    }
-    return paginationBar;
+    return Utils.generateValuesTillNumber(totalPages);
   };
 
   sortUserData = (userData, selectedFilter) =>
@@ -45,10 +57,16 @@ class Pagination extends Component {
       a[selectedFilter].localeCompare(b[selectedFilter])
     );
 
-  handleOpenUserDetailsCard = uid => {
+  handleOpenUserDetailsCard = async uid => {
     const { setSelectedUser } = this.props;
-    setSelectedUser(uid);
-    this.setState({ isUserDetailsCardOpen: true });
+    await setSelectedUser(uid);
+    this.setState(prevState => ({
+      isUserDetailsCardOpen: !prevState.isUserDetailsCardOpen
+    }));
+  };
+
+  getPerPageRowOptions = totalRows => {
+    return Utils.generateValuesTillNumber(totalRows);
   };
 
   render() {
@@ -71,7 +89,11 @@ class Pagination extends Component {
     const totalPages = Math.ceil(userData.length / rowPerPage);
     return (
       <div className="table-wrapper">
-        <Selector rowPerPage={rowPerPage} handleOnChange={setRowPerPage} />
+        <SelectVisibleRows
+          rowPerPage={rowPerPage}
+          handleOnChange={setRowPerPage}
+          options={this.getPerPageRowOptions(userData.length)}
+        />
         <SortBy sortBy={sortBy} handleOnChange={setFilter} />
         <Table
           currentPage={currentPage}

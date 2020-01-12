@@ -1,24 +1,29 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Selector = props => (
-  <div className="row__selector">
-    <label>Number of rows in a page</label>
+const Selector = ({ label, options, selectedValue, handleOnChange }) => (
+  <div className="selector">
+    <label>{label}</label>
     <select
-      value={props.rowPerPage}
-      onChange={e => props.handleOnChange(e.target.value)}
+      className="select"
+      value={selectedValue}
+      onChange={e => handleOnChange(e.target.value)}
     >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
+      {options.map((option, index) => (
+        <option key={index} value={option}>
+          {option}
+        </option>
+      ))}
     </select>
   </div>
 );
+
+Selector.propTypes = {
+  label: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  handleOnChange: PropTypes.func.isRequired
+};
 
 export default Selector;
