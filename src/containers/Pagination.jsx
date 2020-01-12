@@ -83,7 +83,6 @@ class Pagination extends Component {
 
     const sortedData = this.sortUserData(userData, sortBy);
     const pagedData = this.createPagedData(sortedData, rowPerPage);
-    console.log(pagedData);
     const totalPages = Math.ceil(userData.length / rowPerPage);
     return (
       <div className="table-wrapper">

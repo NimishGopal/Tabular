@@ -10,6 +10,7 @@ const SortBy = ({ sortBy, handleOnChange }) => (
       options={[FILTER.SORT.NAME, FILTER.SORT.EMAIL]}
       handleOnChange={handleOnChange}
       selectedValue={sortBy}
+      forValue="Sort filter"
     />
   </div>
 );

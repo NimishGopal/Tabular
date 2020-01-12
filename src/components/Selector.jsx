@@ -1,9 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Selector = ({ label, options, selectedValue, handleOnChange }) => (
+const Selector = ({
+  label,
+  options,
+  selectedValue,
+  handleOnChange,
+  forValue
+}) => (
   <div className="selector">
-    <label>{label}</label>
+    <label htmlFor={forValue}>{label}</label>
     <select
       className="select"
       value={selectedValue}
@@ -23,7 +29,8 @@ Selector.propTypes = {
   options: PropTypes.array.isRequired,
   selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
-  handleOnChange: PropTypes.func.isRequired
+  handleOnChange: PropTypes.func.isRequired,
+  forValue: PropTypes.string.isRequired
 };
 
 export default Selector;

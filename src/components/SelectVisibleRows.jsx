@@ -9,6 +9,7 @@ const SelectVisibleRows = ({ rowPerPage, handleOnChange, options }) => (
       selectedValue={rowPerPage}
       handleOnChange={handleOnChange}
       options={options}
+      forValue="Number of rows"
     />
   </div>
 );

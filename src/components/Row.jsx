@@ -16,38 +16,41 @@ const Row = ({
   handleOpenUserDetailsCard,
   selectedUser,
   isUserDetailsCardOpen
-}) => (
-  <div className="row">
-    <div className={deletableRow ? "row-text" : "row-heading"}>{name}</div>
-    <div className={deletableRow ? "row-text" : "row-heading"}>{username}</div>
-    <div className={deletableRow ? "row-text" : "row-heading"}>{email}</div>
-    <div className={deletableRow ? "row-text" : "row-heading"}>{phone}</div>
-    <div className={deletableRow ? "row-text" : "row-heading"}>{website}</div>
-    <div className={deletableRow ? "row-text" : "row-heading"}>{address}</div>
-    <div className={deletableRow ? "row-text" : "row-heading"}>{company}</div>
-    <Conditional if={deletableRow}>
-      <div className="cta-wrapper">
-        <div
-          className={`icon ${
-            selectedUser === uid && isUserDetailsCardOpen ? "open" : ""
-          }`}
-          onClick={() => handleOpenUserDetailsCard(uid)}
-        >
-          <img
-            src="https://img.icons8.com/metro/52/000000/chevron-down.png"
-            alt="open-icon"
-          />
+}) => {
+  const decideTextOrHeading = deletableRow ? "row-text" : "row-heading";
+  return (
+    <div className="row">
+      <div className={decideTextOrHeading}>{name}</div>
+      <div className={decideTextOrHeading}>{username}</div>
+      <div className={decideTextOrHeading}>{email}</div>
+      <div className={decideTextOrHeading}>{phone}</div>
+      <div className={decideTextOrHeading}>{website}</div>
+      <div className={decideTextOrHeading}>{address}</div>
+      <div className={decideTextOrHeading}>{company}</div>
+      <Conditional if={deletableRow}>
+        <div className="cta-wrapper">
+          <div
+            className={`icon ${
+              selectedUser === uid && isUserDetailsCardOpen ? "open" : ""
+            }`}
+            onClick={() => handleOpenUserDetailsCard(uid)}
+          >
+            <img
+              src="https://img.icons8.com/metro/52/000000/chevron-down.png"
+              alt="open-icon"
+            />
+          </div>
+          <div className="icon" onClick={() => handleDeleteUser(uid)}>
+            <img
+              src="https://img.icons8.com/material-outlined/24/000000/cancel.png"
+              alt="cancel-icon"
+            />
+          </div>
         </div>
-        <div className="icon" onClick={() => handleDeleteUser(uid)}>
-          <img
-            src="https://img.icons8.com/material-outlined/24/000000/cancel.png"
-            alt="cancel-icon"
-          />
-        </div>
-      </div>
-    </Conditional>
-  </div>
-);
+      </Conditional>
+    </div>
+  );
+};
 
 Row.propTypes = {
   uid: PropTypes.number,
