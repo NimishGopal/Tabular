@@ -1,0 +1,22 @@
+.active {
+  color: @active-color;
+  border-color: @active-color;
+}
+.pagination-bar {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  place-content: center;
+  grid-gap: 1.5rem;
+  a.page {
+    border: 1px solid #545454;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      .active;
+    }
+    &.active {
+      .active;
+    }
+  }
+}
