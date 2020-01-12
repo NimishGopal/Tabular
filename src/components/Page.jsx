@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Row from "./Row";
 import Conditional from "./Conditional";
@@ -24,9 +24,8 @@ const Page = ({
       company
     } = user;
     return (
-      <>
+      <Fragment key={index}>
         <Row
-          key={index}
           uid={id}
           name={name}
           username={username}
@@ -46,7 +45,7 @@ const Page = ({
             handleCloseUserDetailsCard={handleCloseUserDetailsCard}
           />
         </Conditional>
-      </>
+      </Fragment>
     );
   });
 
