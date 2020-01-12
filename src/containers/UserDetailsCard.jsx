@@ -7,7 +7,7 @@ import Utils from "../utils";
 class UserDetailsCard extends Component {
   static propTypes = {
     fetchSelectedUserDetails: PropTypes.func.isRequired,
-    selectedUserDetails: PropTypes.array.isRequired,
+    selectedUserDetails: PropTypes.object.isRequired,
     selectedUser: PropTypes.number
   };
 
