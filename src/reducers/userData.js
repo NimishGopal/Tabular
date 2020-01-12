@@ -44,6 +44,16 @@ export default function userData(state = initialState, action) {
         }
       );
     }
+    case ActionTypes.CLEAR_USER_DETAILS: {
+      return Object.assign(
+        {},
+        {
+          ...state,
+          selectedUser: 0,
+          selectedUserDetails: {}
+        }
+      );
+    }
     default:
       return state;
   }

@@ -58,7 +58,7 @@ class Pagination extends Component {
     const { setSelectedUser } = this.props;
     await setSelectedUser(uid);
     this.setState(prevState => ({
-      isUserDetailsCardOpen: !prevState.isUserDetailsCardOpen
+      isUserDetailsCardOpen: true
     }));
   };
 

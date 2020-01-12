@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import { fetchSelectedUserDetails } from "../thunks/user";
 import { connect } from "react-redux";
 import Utils from "../utils";
+import { clearUserDetails } from "../actions/userData";
 
 class UserDetailsCard extends Component {
   static propTypes = {
     fetchSelectedUserDetails: PropTypes.func.isRequired,
     selectedUserDetails: PropTypes.object.isRequired,
-    selectedUser: PropTypes.number
+    selectedUser: PropTypes.number,
+    clearUserDetails: PropTypes.func.isRequired
   };
 
   state = {
@@ -21,9 +23,13 @@ class UserDetailsCard extends Component {
     this.setState({ isFetched: true });
   }
 
+  componentWillUnmount() {
+    this.props.clearUserDetails();
+  }
+
   render() {
     const { isFetched } = this.state;
-    if (!isFetched) return null;
+    if (!isFetched) return <div>Loading...</div>;
     const { selectedUserDetails } = this.props;
     const {
       name,
@@ -51,6 +57,9 @@ class UserDetailsCard extends Component {
 const mapDispatchToProps = dispatch => ({
   fetchSelectedUserDetails: url => {
     dispatch(fetchSelectedUserDetails(url));
+  },
+  clearUserDetails: () => {
+    dispatch(clearUserDetails());
   }
 });
 

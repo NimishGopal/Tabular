@@ -19,3 +19,7 @@ export const deleteUser = id => ({
   type: ActionTypes.DELETE_USER,
   payload: id
 });
+
+export const clearUserDetails = () => ({
+  type: ActionTypes.CLEAR_USER_DETAILS
+});
