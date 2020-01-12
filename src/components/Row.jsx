@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Conditional from "./Conditional";
+import Utils from "../utils";
 
 const Row = ({
   uid,
@@ -15,7 +16,8 @@ const Row = ({
   handleDeleteUser,
   handleOpenUserDetailsCard,
   selectedUser,
-  isUserDetailsCardOpen
+  isUserDetailsCardOpen,
+  selectedUserDetails
 }) => {
   const decideTextOrHeading = deletableRow ? "row-text" : "row-heading";
   return (
@@ -31,7 +33,11 @@ const Row = ({
         <div className="cta-wrapper">
           <div
             className={`icon ${
-              selectedUser === uid && isUserDetailsCardOpen ? "open" : ""
+              selectedUser === uid &&
+              isUserDetailsCardOpen &&
+              !Utils.isEmptyObject(selectedUserDetails)
+                ? "open"
+                : ""
             }`}
             onClick={() => handleOpenUserDetailsCard(uid)}
           >
@@ -65,7 +71,8 @@ Row.propTypes = {
   handleDeleteUser: PropTypes.func,
   handleOpenUserDetailsCard: PropTypes.func,
   selectedUser: PropTypes.number,
-  isUserDetailsCardOpen: PropTypes.bool
+  isUserDetailsCardOpen: PropTypes.bool,
+  selectedUserDetails: PropTypes.object
 };
 
 export default Row;

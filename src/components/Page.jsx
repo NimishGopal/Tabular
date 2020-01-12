@@ -10,7 +10,8 @@ const Page = ({
   isUserDetailsCardOpen,
   handleOpenUserDetailsCard,
   selectedUser,
-  handleCloseUserDetailsCard
+  handleCloseUserDetailsCard,
+  selectedUserDetails
 }) =>
   currentPageData.map((user, index) => {
     const {
@@ -39,6 +40,7 @@ const Page = ({
           handleOpenUserDetailsCard={handleOpenUserDetailsCard}
           selectedUser={selectedUser}
           isUserDetailsCardOpen={isUserDetailsCardOpen}
+          selectedUserDetails={selectedUserDetails}
         />
         <Conditional if={isUserDetailsCardOpen && id === selectedUser}>
           <UserDetailsCard
@@ -55,7 +57,8 @@ Page.propTypes = {
   isUserDetailsCardOpen: PropTypes.bool.isRequired,
   handleOpenUserDetailsCard: PropTypes.func.isRequired,
   selectedUser: PropTypes.number.isRequired,
-  handleCloseUserDetailsCard: PropTypes.func.isRequired
+  handleCloseUserDetailsCard: PropTypes.func.isRequired,
+  selectedUserDetails: PropTypes.object.isRequired
 };
 
 export default Page;

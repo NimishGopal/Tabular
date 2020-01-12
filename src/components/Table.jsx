@@ -11,7 +11,8 @@ const Table = ({
   isUserDetailsCardOpen,
   handleOpenUserDetailsCard,
   selectedUser,
-  handleCloseUserDetailsCard
+  handleCloseUserDetailsCard,
+  selectedUserDetails
 }) => (
   <div className="table">
     <Row
@@ -36,6 +37,7 @@ const Table = ({
         isUserDetailsCardOpen={isUserDetailsCardOpen}
         selectedUser={selectedUser}
         handleCloseUserDetailsCard={handleCloseUserDetailsCard}
+        selectedUserDetails={selectedUserDetails}
       />
     </Conditional>
   </div>
@@ -48,7 +50,8 @@ Table.propTypes = {
   isUserDetailsCardOpen: PropTypes.bool.isRequired,
   handleOpenUserDetailsCard: PropTypes.func.isRequired,
   selectedUser: PropTypes.number.isRequired,
-  handleCloseUserDetailsCard: PropTypes.func.isRequired
+  handleCloseUserDetailsCard: PropTypes.func.isRequired,
+  selectedUserDetails: PropTypes.object.isRequired
 };
 
 export default Table;

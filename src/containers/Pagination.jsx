@@ -24,7 +24,8 @@ class Pagination extends Component {
     deleteUser: PropTypes.func.isRequired,
     sortBy: PropTypes.string.isRequired,
     setFilter: PropTypes.func.isRequired,
-    selectedUser: PropTypes.number.isRequired
+    selectedUser: PropTypes.number.isRequired,
+    selectedUserDetails: PropTypes.object.isRequired
   };
 
   state = {
@@ -78,7 +79,8 @@ class Pagination extends Component {
       deleteUser,
       sortBy,
       setFilter,
-      selectedUser
+      selectedUser,
+      selectedUserDetails
     } = this.props;
 
     const { isUserDetailsCardOpen } = this.state;
@@ -102,6 +104,7 @@ class Pagination extends Component {
           isUserDetailsCardOpen={isUserDetailsCardOpen}
           selectedUser={selectedUser}
           handleCloseUserDetailsCard={this.handleCloseUserDetailsCard}
+          selectedUserDetails={selectedUserDetails}
         />
         <Conditional if={pagedData.length}>
           <PaginationBar
@@ -141,7 +144,8 @@ const mapStateToProps = state => ({
   rowPerPage: state.pagination.rowPerPage,
   currentPage: state.pagination.currentPage,
   sortBy: state.filter.sortBy,
-  selectedUser: state.userData.selectedUser
+  selectedUser: state.userData.selectedUser,
+  selectedUserDetails: state.userData.selectedUserDetails
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination);
