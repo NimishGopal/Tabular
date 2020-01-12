@@ -34,9 +34,6 @@ class Pagination extends Component {
     const { fetchUserData } = this.props;
     fetchUserData("api/users");
   }
-  componentDidUpdate() {
-    // console.log(this.props.userData);
-  }
 
   createPagedData = (userData, rowPerPage) => {
     if (userData) {

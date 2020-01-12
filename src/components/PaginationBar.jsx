@@ -8,7 +8,7 @@ const PaginationBar = ({ paginationBar, handlePageChange, currentPage }) => {
         <a
           key={index}
           className={`page ${currentPage === page - 1 ? "active" : ""}`}
-          onClick={() => handlePageChange(page)}
+          onClick={() => handlePageChange(page - 1)}
         >
           {page}
         </a>
