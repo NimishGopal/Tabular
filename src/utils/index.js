@@ -2,8 +2,11 @@ const Utils = {
   fetch: async (url, options = {}) => {
     try {
       const response = await fetch(url, options);
-      const parseText = await response.text();
+      if(response.status === 200){
+        const parseText = await response.text();
       return JSON.parse(parseText);
+      }
+      else throw new Error(`Unexpected error happened. Couldn't fetch`);
     } catch (err) {
       console.log(err);
     }

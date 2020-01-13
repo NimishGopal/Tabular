@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./index.js",
@@ -39,7 +38,7 @@ module.exports = {
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
   output: {
-    path: path.resolve(__dirname, "build/"),
+    path: path.resolve(__dirname, "public/"),
     publicPath: "/build/",
     filename: "bundle.js"
   },
@@ -53,14 +52,11 @@ module.exports = {
     },
     contentBase: path.join(__dirname, "public/"),
     port: 8000,
-    publicPath: "http://localhost:8000/build/",
+    publicPath: "http://localhost:8000/",
     hotOnly: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      filename: "./index.html"
-    })
   ],
   optimization: {
     minimizer: [

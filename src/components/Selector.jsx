@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Selector = ({
   label,
-  options,
+  options=[],
   selectedValue,
   handleOnChange,
   forValue

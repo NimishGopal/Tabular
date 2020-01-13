@@ -5,7 +5,7 @@ import Conditional from "./Conditional";
 import UserDetailsCard from "../containers/UserDetailsCard";
 
 const Page = ({
-  currentPageData,
+  currentPageData=[],
   handleDeleteUser,
   isUserDetailsCardOpen,
   handleOpenUserDetailsCard,

@@ -82,6 +82,7 @@ class Pagination extends Component {
       selectedUser,
       selectedUserDetails
     } = this.props;
+    console.log(userData)
 
     const { isUserDetailsCardOpen } = this.state;
 
